@@ -1,0 +1,43 @@
+<style>
+html,body {
+  margin: 0px;
+  overflow-x: hidden;
+  background-color: #F5F5F5;
+}
+.txtarea {
+  width:500px;
+  background-color: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-width: 0px;
+  font-size: 17.5px;
+  resize: none;
+  height: 100px;
+}
+.formName {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: white;
+  border-width: 0px;
+  border-bottom: none;
+  padding: 10px;
+  font-size: 17.5px;
+  width:500px;
+}
+.submit {
+  width:500px;
+  background-color: white;
+  border-width: 0px;
+  padding: 10px;
+}
+#post {
+  text-align: center;
+}
+</style>
+
+
+<form method="post" id="post">
+  <input type="text" class="form-control formName" name="achievementname" placeholder="Name"><br/>
+  <textarea class="form-control txtarea" type="text" name="descr"  placeholder=" Description"></textarea><br />
+  <input type="submit" name="submit" value="Submit" class="submit" id="submit"/>
+</form>
