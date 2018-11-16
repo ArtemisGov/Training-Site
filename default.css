@@ -1,0 +1,30 @@
+html, body {
+  margin: 0px;
+  overflow-x: hidden;
+  background-color:  #F5F5F5;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  width: 100vw;
+}
+li {
+  float: right;
+}
+li.left {
+  float: left !important;
+}
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 17px 10px;
+  text-decoration: none;
+  font-size: 19px;
+}
