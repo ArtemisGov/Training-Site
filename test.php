@@ -187,6 +187,8 @@ $(document).ready(function( {
       var name = $("input").val();
       $.post("testpost.php", {
         title: name
+      }, function(date, status) {
+        alert(status);
       });
   });
 }));
