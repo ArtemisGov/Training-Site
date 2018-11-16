@@ -166,10 +166,11 @@ if (isset($type)) {
   echo "<meta http-equiv='refresh' content='0; url=create.php' />";
 }
 if (isset($kickout)) {
-  echo "<meta http-equiv='refresh' content='0; url=index.php' />";
+  //echo "<meta http-equiv='refresh' content='0; url=index.php' />";
 }
 if (isset($success) == "yes") {
 echo '<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+<link href="default.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
@@ -194,36 +195,6 @@ $(document).ready(function( {
 }));
 </script>
 <style>
-html, body {
-  margin: 0px;
-  overflow-x: hidden;
-  background-color:  #F5F5F5;
-}
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: white;
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  width: 100vw;
-}
-li {
-  float: right;
-}
-li.left {
-  float: left !important;
-}
-li a {
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 17px 10px;
-  text-decoration: none;
-  font-size: 19px;
-}
 #Avatarwrapper {
   height: 30px;
   width: 30px;
@@ -459,6 +430,9 @@ button {
     width 100vw;
     height: 50px;
   }
+  .bordertop {
+    border-top: 1px solid #ccc !important;
+  }
 </style>
 <title>
   Local Courses
@@ -527,7 +501,7 @@ button {
     $defCatDesc = $rows['description'];
     $defCatID = $rows['id'];
 
-  echo '<div class="card mainCard">
+  echo '<div class="card mainCard bordertop">
       <div class="card-body">
         <h4 class="card-title">
           <span class="hax">
