@@ -56,6 +56,7 @@
     $defaultCatID = $defaultCatRow['min(id)'];
     $_SESSION["category"] = $defaultCatID;
     $_SESSION["course"] = $editID;
+    $_SESSION["new"] = "YES";
     header("Refresh:0; url=create.php");
   }
 
@@ -91,6 +92,7 @@
       $defaultCatRow = @mysqli_fetch_array($defaultCatRes);
       $defaultCatID = $defaultCatRow['id'];
       $_SESSION["category"] = $defaultCatID;
+      unset($_SESSION["new"]);
       $autEdit = "UPDATE authentication SET gID = '" . $tempID . "' WHERE id = '" . $authID . "';";
       mysqli_query($mysqli,$autEdit);
   } else {
@@ -159,6 +161,22 @@
     mysqli_query($mysqli,$category);
     header("Refresh:0;");
   }
+  // later have these save all inputs and close the page
+    if(isset($_POST['private'])) {
+      $privateupd = "UPDATE course SET status = 1 WHERE id = '" . $latest . "';";
+      mysqli_query($mysqli,$privateupd);
+      header("Refresh:0;");
+    }
+    if(isset($_POST['unlisted'])) {
+      $unlistedupd = "UPDATE course SET status = 2 WHERE id = '" . $latest . "';";
+      mysqli_query($mysqli,$unlistedupd);
+      header("Refresh:0;");
+    }
+    if(isset($_POST['published'])) {
+      $publishedupd = "UPDATE course SET status = 3 WHERE id = '" . $latest . "';";
+      mysqli_query($mysqli,$publishedupd);
+      header("Refresh:0;");
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -508,13 +526,13 @@ button {
     </button>
     <div class="dropdown-menu up" aria-labelledby="dropdownMenuButton" style="width: 200px;">
       <form method="post">
-        <button type="submit" name="" class="dropdown-item" href="#"><i class="fas fa-square" style="color: #ce4431;"></i> &nbsp; Unlisted</button>
+        <button type="submit" name="private" class="dropdown-item" href="#"><i class="fas fa-square" style="color: #5d665e;"></i> &nbsp; Private</button>
       </form>
       <form method="post">
-        <button class="dropdown-item" href="#"><i class="fas fa-square" style="color: #5d665e;"></i> &nbsp; Private</button>
+        <button type="submit" name="unlisted" class="dropdown-item" href="#"><i class="fas fa-square" style="color: #ce4431;"></i> &nbsp; Unlisted</button>
       </form>
       <form method="post">
-        <button class="dropdown-item" href="#"><i class="fas fa-square" style="color: #3174ce;"></i> &nbsp; Published</button>
+        <button type="submit" name="published" class="dropdown-item" href="#"><i class="fas fa-square" style="color: #3174ce;"></i> &nbsp; Published</button>
       </form>
     </div>
   </div>
@@ -579,7 +597,7 @@ button {
               <input type="text" class="defaultCatName uneditable-input" name="catDescID" value="' . $defCatID . '" style="position:absolute; left: -9999999px; height: 3px;" readonly>
               <button type="submit" value="defaultCatDesc" name="defaultCatSubmit" class="btn btn-primary button btn-lg extra"><i class="far fa-check-circle checkbox"></i></button>
           </form>';
-         echo $usrid; echo "|"; echo $latest; echo "|"; echo $courseName; echo "|"; echo $_SESSION["category"];
+         echo $usrid; echo "|"; echo $latest; echo "|"; echo $courseName; echo "|"; echo $_SESSION["category"]; echo "|"; echo $_SESSION["course"];
         echo '</p>
       </div>
     </div>

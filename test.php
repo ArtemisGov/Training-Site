@@ -182,17 +182,15 @@ echo '<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="s
       <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
       <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <script>
-$(document).ready(function( {
-
-  $("input").keyup(function() {
+$("input").keyup(function() {
       var name = $("input").val();
       $.post("testpost.php", {
         title: name
       }, function(date, status) {
         alert(status);
       });
+return false;
   });
-}));
 </script>
 <style>
 #Avatarwrapper {
@@ -451,13 +449,13 @@ button {
     </button>
     <div class="dropdown-menu up" aria-labelledby="dropdownMenuButton" style="width: 200px;">
       <form method="post">
-        <button type="submit" name="" class="dropdown-item" href="#"><i class="fas fa-square" style="color: #ce4431;"></i> &nbsp; Unlisted</button>
+        <button type="submit" name="unlisted" class="dropdown-item" href="#"><i class="fas fa-square" style="color: #ce4431;"></i> &nbsp; Unlisted</button>
       </form>
       <form method="post">
-        <button class="dropdown-item" href="#"><i class="fas fa-square" style="color: #5d665e;"></i> &nbsp; Private</button>
+        <button type="submit" name="private" class="dropdown-item" href="#"><i class="fas fa-square" style="color: #5d665e;"></i> &nbsp; Private</button>
       </form>
       <form method="post">
-        <button class="dropdown-item" href="#"><i class="fas fa-square" style="color: #3174ce;"></i> &nbsp; Published</button>
+        <button type="submit" name="published" class="dropdown-item" href="#"><i class="fas fa-square" style="color: #3174ce;"></i> &nbsp; Published</button>
       </form>
     </div>
   </div>

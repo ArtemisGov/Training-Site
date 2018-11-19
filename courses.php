@@ -3,7 +3,7 @@
 
   $connection = @mysqli_connect("localhost","root","","RS");
   $usrid = $_SESSION["usrid"];
-  $Query = "SELECT name, description, creator, type  FROM course WHERE NOT creator='" . $usrid . "';";
+  $Query = "SELECT name, description, creator, type  FROM course WHERE NOT creator='" . $usrid . "' AND status = 3;";
   $res=$connection->query($Query);
 
   if (isset($_SESSION["name"])) {
