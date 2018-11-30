@@ -577,7 +577,7 @@ button {
   while($rows=$res->fetch_assoc()){
     $defCatName = $rows['name'];
     $defCatDesc = $rows['description'];
-    $defCatID = $rows['id'];
+    $defCatID = $rows['id']; // Do I still need this?
 
   echo '<div class="card mainCard">
       <div class="card-body">
@@ -599,6 +599,20 @@ button {
           </form>';
          echo $usrid; echo "|"; echo $latest; echo "|"; echo $courseName; echo "|"; echo $_SESSION["category"]; echo "|"; echo $_SESSION["course"];
         echo '</p>
+        <br /> <br /> <br />
+        <h4 style="float: left !important; text-align: left !important;">
+          Category
+        </h4>
+        <form method="post">
+          &nbsp;&nbsp;<input type="text" name="fname" style="min-width:95%; outline: 0; border-width: 0 0 2px; border-color: blue">
+        </form>
+        <br />
+        <h5 style="float: left !important; text-align: left !important; margin-left: 7%;">
+          Add a Page
+        </h4>
+        <form method="post">
+          <input type="text" name="fname" style="min-width:90%;margin-left: 7%; outline: 0; border-width: 0 0 2px; border-color: blue">&nbsp;<i class="fas fa-cog"></i>
+        </form>
       </div>
     </div>
     <div class="band"> </div><br />';
@@ -609,7 +623,7 @@ button {
           <button type="submit" name="addCat" class="btn btn-primary btn-lg extra">Add Category</button>
       </form>
    </center>
-   <br />
+   <br /><br /><br /><br /><br /><br /><br />
    </div>
   </div>
 </body>
