@@ -23,7 +23,7 @@ $avatar = $userRow['profilePicture'];
 }
 ?>
 <ul>
-  <li><a href="" style="margin-right: 30px;"><?php echo $nav[5]; ?></a></li>
+  <li><a href="contact.php" style="margin-right: 30px;"><?php echo $nav[5]; ?></a></li>
   <?php
   session_start();
   if (isset($_SESSION["session"])) {
