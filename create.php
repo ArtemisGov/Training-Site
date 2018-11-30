@@ -177,6 +177,13 @@
       mysqli_query($mysqli,$publishedupd);
       header("Refresh:0;");
     }
+
+    /*
+      Since this has become so fucking long I gotta translate the variables to remember them.
+      CourseID = $_SESSION["course"]; or $latest
+      CategoryID =
+      Course Groups are Sub Categories
+    */
 ?>
 <!DOCTYPE html>
 <html>
@@ -579,6 +586,9 @@ button {
     $defCatDesc = $rows['description'];
     $defCatID = $rows['id']; // Do I still need this?
 
+    $subCat = "SELECT id, name FROM 'course groups' WHERE category='" . $defCatID . "' AND usrid='" . $usrid . "';";
+    $catr=$connection->query($subCat);
+
   echo '<div class="card mainCard">
       <div class="card-body">
         <h4 class="card-title">
@@ -601,18 +611,33 @@ button {
         echo '</p>
         <br /> <br /> <br />
         <h4 style="float: left !important; text-align: left !important;">
-          Category
-        </h4>
-        <form method="post">
-          &nbsp;&nbsp;<input type="text" name="fname" style="min-width:95%; outline: 0; border-width: 0 0 2px; border-color: blue">
-        </form>
-        <br />
-        <h5 style="float: left !important; text-align: left !important; margin-left: 7%;">
-          Add a Page
-        </h4>
-        <form method="post">
-          <input type="text" name="fname" style="min-width:90%;margin-left: 7%; outline: 0; border-width: 0 0 2px; border-color: blue">&nbsp;<i class="fas fa-cog"></i>
-        </form>
+          Sub Category
+        </h4>';
+            while($group=$catr->fetch_assoc()){
+              $groupName  = $group['name'];
+              $groupID = $group['id'];
+
+              $pageQ = "SELECT id, name, type FROM page WHERE category='" . $latest . "' AND usrid='" . $usrid . "';";
+              $page=$connection->query($subCat);
+              echo '
+                <form method="post">
+                  &nbsp;&nbsp;<input type="text" name="categoryName" style="min-width:95%; outline: 0; border-width: 0 0 2px; border-color: blue">
+                </form>
+                <br />';
+
+                echo '
+                <h5 style="float: left !important; text-align: left !important; margin-left: 7%;">
+                  Add a Page
+                </h5>';
+                while($pageD=$page->fetch_assoc()){
+                  $pageID = $pageD['id'];
+                  echo '
+                    <form method="post">
+                      <input type="text" name="pageName" style="min-width:88%;margin-left: 7%; outline: 0; border-width: 0 0 2px; border-color: blue">&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;<i class="fas fa-cog"></i>
+                    </form>';
+                }
+            }
+        echo '
       </div>
     </div>
     <div class="band"> </div><br />';
