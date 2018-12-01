@@ -87,6 +87,10 @@
       mysqli_query($mysqli,$sub);
       $category = "INSERT INTO category ( course, creator, catnum ) VALUES ('" . $tempID . "', '" . $usrid . "', '1');";
       mysqli_query($mysqli,$category);
+      $groupCreate = "INSERT INTO 'course groups' (usrid, category, name) VALUES ('" . $usrid . "', '1', 'default');";
+      mysqli_query($mysqli,$groupCreate);
+      $groupCreate = "INSERT INTO page (course, groupID, name) VALUES ('" . $tempID . "', '1', 'default page');";
+      mysqli_query($mysqli,$groupCreate);
       $defaultCatQ = "SELECT id FROM category WHERE course = '" . $tempID . "' ORDER BY id DESC LIMIT 1;";
       $defaultCatRes = @mysqli_query($mysqli,$defaultCatQ);
       $defaultCatRow = @mysqli_fetch_array($defaultCatRes);
@@ -648,7 +652,7 @@ button {
           <button type="submit" name="addCat" class="btn btn-primary btn-lg extra">Add Category</button>
       </form>
    </center>
-   <br /><br /><br /><br /><br /><br /><br />
+   <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
    </div>
   </div>
 </body>
