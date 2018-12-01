@@ -123,6 +123,20 @@ li a {
 </head>
 <body>
 <span id="menu"></span>
-
+<br />
+<form method="post">
+<div class="form-group">
+  <label for="formGroupExampleInput">Name</label>
+  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+</div>
+<div class="form-group">
+  <label for="exampleFormControlInput1">Email address</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+</div>
+<div class="form-group">
+  <label for="exampleFormControlTextarea1">Example textarea</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>
+</form>
 </body>
 </html>'; ?>
