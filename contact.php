@@ -113,7 +113,16 @@ li a {
   visibility: visible;
   transition: visibility .1s ease-in-out .01s;
 }
-
+#wrapper {
+  margin-top: 100px;
+  width: 100vw;
+  background-color: white;
+  height: auto;
+  padding: 30px;
+}
+h4 {
+  text-align: center;
+}
 </style>
 <script>
   $(document).ready(function() {
@@ -124,19 +133,26 @@ li a {
 <body>
 <span id="menu"></span>
 <br />
-<form method="post">
-<div class="form-group">
-  <label for="formGroupExampleInput">Name</label>
-  <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+<div id="wrapper">
+  <h4>
+    Contact us
+  </h4>
+  <br />
+  <form method="post">
+    <div class="form-group">
+      <label for="formGroupExampleInput">Name</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Email address</label>
+      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Message</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <input type="submit" title="Submit?" data-content="wooooot" class="btn btn-primary btn-lg extra" value="Submit">
+  </form>
 </div>
-<div class="form-group">
-  <label for="exampleFormControlInput1">Email address</label>
-  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-</div>
-<div class="form-group">
-  <label for="exampleFormControlTextarea1">Example textarea</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-</div>
-</form>
 </body>
 </html>'; ?>
