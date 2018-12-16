@@ -19,6 +19,20 @@
     print("Connect failed: %s\n" . mysqli_connect_error());
     exit();
   }
+  if(isset($_POST['cForm'])) {
+    $email = "admin@artemisrepublic.co";
+    $subject = "Training Site Contact Form Inquiry From: ";
+    $name = $_POST['name'];
+    $source = $_POST['email'];
+    $subject = $subject.$name;
+    $message = $_POST['message'];
+    $headers = 'From: ' . $source . "\r\n" .
+    'Reply-To: info@artemisrepublic.co' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+    mail($email, $subject, $message, $headers);
+    // remember to add additional security incl. filtering.
+  }
+
   // Use this for view control
   // Include in other pages, block access if not logged in
   // Truncate the authentication table daily.
@@ -52,17 +66,17 @@ echo '<!DOCTYPE html>
   <form method="post">
     <div class="form-group">
       <label for="formGroupExampleInput">Name or Username</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="John Doe / Skr1ptk1d9000">
+      <input type="text" class="form-control" id="formGroupExampleInput" name="name" placeholder="John Doe / Skr1ptk1d9000">
     </div>
     <div class="form-group">
       <label for="exampleFormControlInput1">Email address</label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+      <input type="email" class="form-control" id="exampleFormControlInput1" name="email" placeholder="name@example.com">
     </div>
     <div class="form-group">
       <label for="exampleFormControlTextarea1">Message</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="3"></textarea>
     </div>
-    <input type="submit" title="Submit?" data-content="wooooot" class="btn btn-primary btn-lg extra" value="Submit">
+    <input type="submit" title="Submit?" name="cForm" class="btn btn-primary btn-lg extra" value="Submit">
   </form>
 </div>
 </body>

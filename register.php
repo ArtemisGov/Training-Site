@@ -165,7 +165,7 @@ $success = "";
         $message = 'MAKE CONFIRMATION LINK & PUT HERE. HTML MAY ALSO BE PLACED HERE. <a href="https://gov.artemisrepublic.co/confirmation.php?code=' . $pseuRand . '"> click </a>';
         $headers = 'From: info@artemisrepublic.co' . "\r\n" .
         'Reply-To: info@artemisrepublic.co' . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
+        'X-Mailer: PHP/' . phpversion(); // tf why is php version included. That gives the user data on the website. Check and test this.
         mail($email, $subject, $message, $headers);
         $success = "Success! Check your email for confirmation. It may take up to 20min.";
         header("Refresh:20; url=login.php");
