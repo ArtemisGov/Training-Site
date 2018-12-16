@@ -51,8 +51,8 @@ echo '<!DOCTYPE html>
   <br />
   <form method="post">
     <div class="form-group">
-      <label for="formGroupExampleInput">Name</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+      <label for="formGroupExampleInput">Name or Username</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="John Doe / Skr1ptk1d9000">
     </div>
     <div class="form-group">
       <label for="exampleFormControlInput1">Email address</label>
