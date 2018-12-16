@@ -365,7 +365,10 @@ function myAutosavedTextbox_onTextChanged()
           Sub Category
         </h4>';
 
-            while($group=$catr->fetch_assoc()){
+            while($group=$catr->fetch_assoc()){ // Breaks here. Dislikes having a fetch_assoc() loop in a fetch_assoc() loop
+              /*
+                Fatal error: Uncaught Error: Call to a member function fetch_assoc() on boolean in C:\xampp\htdocs\artemis\Training-Site\create.php:368 Stack trace: #0 {main} thrown in C:\xampp\htdocs\artemis\Training-Site\create.php on line 368
+              */
               $groupName  = $group['name'];
               $groupID = $group['id'];
               $pageQ = "SELECT id, name, type FROM page WHERE category='" . $latest . "' AND usrid='" . $usrid . "';";
