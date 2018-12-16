@@ -87,7 +87,7 @@
       mysqli_query($mysqli,$sub);
       $category = "INSERT INTO category ( course, creator, catnum ) VALUES ('" . $tempID . "', '" . $usrid . "', '1');";
       mysqli_query($mysqli,$category);
-      $groupCreate = "INSERT INTO coursegroups (usrid, category, name) VALUES ('" . $usrid . "', 1, 'default');";
+      $groupCreate = "INSERT INTO coursegroups (usrid, category, course, name) VALUES ('" . $usrid . "', 1, '" . $tempID . "', 'default');";
       mysqli_query($mysqli,$groupCreate);
       $groupCreate = "INSERT INTO page (course, groupID, name) VALUES ('" . $tempID . "', '1', 'default page');";
       mysqli_query($mysqli,$groupCreate);
@@ -335,9 +335,9 @@ function myAutosavedTextbox_onTextChanged()
   while($rows=$res->fetch_assoc()){
     $defCatName = $rows['name'];
     $defCatDesc = $rows['description'];
-    $defCatID = $rows['id']; // Do I still need this?
+    $defCatID = $rows['id'];
 
-    $subCat = "SELECT id, name FROM coursegroup WHERE usrid='" . $usrid . "' AND category = '" . $defCatID . "';";
+    $subCat = "SELECT id, name FROM coursegroups WHERE usrid='" . $usrid . "' AND category = '" . $defCatID . "' AND course = '" . $latest . "';";
     $catr=$connection->query($subCat);
 
   echo '<div class="card mainCard">
