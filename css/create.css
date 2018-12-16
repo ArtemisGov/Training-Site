@@ -1,0 +1,255 @@
+html, body {
+  margin: 0px;
+  overflow-x: hidden;
+  background-color:  #F5F5F5;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  width: 100vw;
+}
+li {
+  float: right;
+}
+li.left {
+  float: left !important;
+}
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 17px 10px;
+  text-decoration: none;
+  font-size: 19px;
+}
+#Avatarwrapper {
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  display: block;
+  color: black;
+}
+.dropdown-content {
+  transition: visibility .1s ease-in-out .001s;
+  visibility: hidden;
+  width: 200px;
+  position: fixed;
+  background-color: white;
+}
+#menuAvatar {
+  height: 28px;
+  width: 28px;
+}
+#rando {
+  text-align: center;
+  padding: 17px 10px;
+  text-decoration: none;
+  font-size: 19px;
+  border: none;
+  background-color: white;
+}
+#rando:focus + .dropdown-content {
+  visibility: visible;
+  transition: visibility .1s ease-in-out .01s;
+}
+.dropdown-content:focus + .dropdown-content {
+  visibility: visible;
+  transition: visibility .1s ease-in-out .01s;
+}
+#addCourse {
+  margin-left: 65%;
+}
+#courses {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  margin-left: 10px;
+}
+#question {
+  position: relative;
+  width: 100%;
+  font-size: 100px;
+}
+#name {
+  position: absolute;
+  bottom: 0;
+  font-size: 30px;
+  text-align: center;
+  width: 100%;
+}
+h4 {
+  width: 100%;
+  text-align: right;
+}
+.hax {
+  position: absolute;
+  left:20px;
+  text-align: left !important;
+}
+button {
+  padding: 10px !important;
+  border-radius: 2px !important;
+  font-size: 17px !important;
+}
+.begin {
+  margin-left: 10px;
+}
+.count {
+  border: 5px solid;
+  font-size: 22px;
+  border-color: #8c9399;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  left: 50%;
+}
+.mainCard {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom: 0px;
+}
+.band {
+  width:100%;
+  height:6px;
+  background-color: rgb(51, 159, 255);
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.courseName {
+  background-color: transparent;
+  border: 0px;
+  text-align: center;
+  width: 50%;
+  color: white;
+}
+ .courseName::placeholder {
+   color: #e0e4e7;
+ }
+ dl {
+    list-style-type: none;
+ }
+ .type-pick {
+   transition: visibility .1s ease-in-out .001s;
+   position: fixed;
+   background-color: white;
+   text-align: center;
+   visibility: hidden;
+   font-size: 20px;
+   padding: 20px;
+   left: 44.8vw;
+   border-radius: 1px;
+   transition: visibility .1s ease-in-out .001s;
+ }
+ #bigType:focus + .type-pick {
+   transition: visibility .1s ease-in-out .001s;
+   visibility: visible;
+   transition: visibility .1s ease-in-out .001s;
+ }
+ #bigType {
+   border: 0px;
+   vertical-align: bottom;
+   background-color: transparent;
+   color: white;
+ }
+ .art {
+   color: #c477ee;
+ }
+ .art:hover {
+   color: #9c60bc;
+ }
+ .code {
+   color: #5ebd5f;
+   font-size: 30px;
+ }
+ .code:hover {
+   color: #4f9d51;
+ }
+ .fa-paint-brush {
+   font-size: 30px;
+ }
+ .margin {
+   margin: 5px;
+ }
+ .writing {
+   color: #929292;
+   font-size: 30px;
+ }
+ .writing:hover {
+   color: #4a494b;
+ }
+ .defaultCatName {
+   border: 0px;
+   color: #4a494b;
+   background-color: transparent;
+ }
+ .defaultCatName::placeholder {
+   color: #5d5b5e;
+ }
+ input:focus {
+    outline-width: 0;
+  }
+  .defaultCatDesc {
+    border: 0px;
+    color: #4a494b;
+    background-color: transparent;
+  }
+  textarea {
+    border: none;
+    overflow: auto;
+    outline: none;
+    width: 100%;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none;
+  }
+  .checkbox {
+    color: #34a844;
+  }
+  .button {
+    background-color: transparent;
+    border-color: #34a844;
+    width: 100%;
+  }
+  .button:hover {
+    border-color: #88e495;
+    background-color: #88e495;
+  }
+  .checkbox:hover {
+    color: #2e913c;
+  }
+  #status {
+    width: 100vw;
+    background-color: white;
+    height: 55px;
+    position: fixed;
+    bottom: 0px;
+    padding: 20px;
+    padding-top: 5px;
+    z-index: 20;
+  }
+  #statusContent {
+    margin:2px;
+    text-align: right;
+  }
+  .up {
+    bottom: 100% !important;
+    top: auto !important;
+    float: right !important;
+  }
+  .dropdown {
+    float: right !important;
+  }
+  .btn-status {
+    width: 200px;
+  }
+  #menu {
+    width 100vw;
+    height: 50px;
+  }
