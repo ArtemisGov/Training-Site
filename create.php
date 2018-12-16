@@ -87,7 +87,7 @@
       mysqli_query($mysqli,$sub);
       $category = "INSERT INTO category ( course, creator, catnum ) VALUES ('" . $tempID . "', '" . $usrid . "', '1');";
       mysqli_query($mysqli,$category);
-      $groupCreate = "INSERT INTO 'course groups' (usrid, category, name) VALUES ('" . $usrid . "', '1', 'default');";
+      $groupCreate = "INSERT INTO coursegroups (usrid, category, name) VALUES ('" . $usrid . "', '1', 'default');";
       mysqli_query($mysqli,$groupCreate);
       $groupCreate = "INSERT INTO page (course, groupID, name) VALUES ('" . $tempID . "', '1', 'default page');";
       mysqli_query($mysqli,$groupCreate);
