@@ -493,7 +493,7 @@ button {
   #status {
     width: 100vw;
     background-color: white;
-    height: 75px;
+    height: 55px;
     position: fixed;
     bottom: 0px;
     padding: 20px;
@@ -585,12 +585,13 @@ button {
         </div>
     </center>
   </div><div class="col-8">';
+  
   while($rows=$res->fetch_assoc()){
     $defCatName = $rows['name'];
     $defCatDesc = $rows['description'];
     $defCatID = $rows['id']; // Do I still need this?
 
-    $subCat = "SELECT id, name FROM 'course groups' WHERE category='" . $defCatID . "' AND usrid='" . $usrid . "';";
+    $subCat = "SELECT id, name FROM coursegroup WHERE usrid='" . $usrid . "' AND category = '" . $defCatID . "';";
     $catr=$connection->query($subCat);
 
   echo '<div class="card mainCard">
@@ -613,14 +614,14 @@ button {
           </form>';
          echo $usrid; echo "|"; echo $latest; echo "|"; echo $courseName; echo "|"; echo $_SESSION["category"]; echo "|"; echo $_SESSION["course"];
         echo '</p>
-        <br /> <br /> <br />
+        <br />
         <h4 style="float: left !important; text-align: left !important;">
           Sub Category
         </h4>';
+
             while($group=$catr->fetch_assoc()){
               $groupName  = $group['name'];
               $groupID = $group['id'];
-
               $pageQ = "SELECT id, name, type FROM page WHERE category='" . $latest . "' AND usrid='" . $usrid . "';";
               $page=$connection->query($subCat);
               echo '
@@ -633,6 +634,7 @@ button {
                 <h5 style="float: left !important; text-align: left !important; margin-left: 7%;">
                   Add a Page
                 </h5>';
+
                 while($pageD=$page->fetch_assoc()){
                   $pageID = $pageD['id'];
                   echo '
@@ -640,6 +642,7 @@ button {
                       <input type="text" name="pageName" style="min-width:88%;margin-left: 7%; outline: 0; border-width: 0 0 2px; border-color: blue">&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;<i class="fas fa-cog"></i>
                     </form>';
                 }
+
             }
         echo '
       </div>
