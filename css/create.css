@@ -253,3 +253,17 @@ button {
     width 100vw;
     height: 50px;
   }
+  .pageInput {
+    min-width: 88%;
+    width: unset !important;
+    margin-left: 7%;
+  }
+  .subCat {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: #caf0e2;
+    width:100%;
+  }
+.fa-arrow-right {
+  color: #60af48;
+}

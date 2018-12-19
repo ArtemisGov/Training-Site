@@ -88,15 +88,15 @@
       $category = "INSERT INTO category ( course, creator, catnum ) VALUES ('" . $tempID . "', '" . $usrid . "', '1');";
       mysqli_query($mysqli,$category);
 
-      $catrQuery = "SELECT id, name FROM category WHERE creator = '" . $usrid . "' ORDER BY id DESC LIMIT 1;"; // giving 0 not id of shiet
+      $catrQuery = "SELECT id, name FROM category WHERE creator = '" . $usrid . "' ORDER BY id DESC LIMIT 1;";
       $catrResponse = @mysqli_query($mysqli,$catrQuery);
       $catrRow = @mysqli_fetch_array($catrResponse);
       $tempCatID = $catrRow['id'];
 
       $groupCreate = "INSERT INTO coursegroups (usrid, category, course, name) VALUES ('" . $usrid . "', '" . $tempCatID . "', '" . $tempID . "', 'default');";
       mysqli_query($mysqli,$groupCreate);
-      $groupCreate = "INSERT INTO page (course, groupID, name) VALUES ('" . $tempID . "', '1', 'default page');";
-      mysqli_query($mysqli,$groupCreate);
+      $newPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $tempID . "', '1', 'default page');";
+      mysqli_query($mysqli,$newPage);
       $defaultCatQ = "SELECT id FROM category WHERE course = '" . $tempID . "' ORDER BY id DESC LIMIT 1;";
       $defaultCatRes = @mysqli_query($mysqli,$defaultCatQ);
       $defaultCatRow = @mysqli_fetch_array($defaultCatRes);
@@ -169,6 +169,17 @@
     $categoryCount = $categoryCount + 1;
     $category = "INSERT INTO category ( course, creator, catnum ) VALUES ('" . $finalID . "', '" . $usrid . "', '" . $categoryCount . "');";
     mysqli_query($mysqli,$category);
+
+    $newCat = "SELECT id, name FROM category WHERE creator = '" . $usrid . "' ORDER BY id DESC LIMIT 1;";
+    $newCatResponse = @mysqli_query($mysqli,$newCat);
+    $newCatRow = @mysqli_fetch_array($newCatResponse);
+    $catID = $newCatRow['id'];
+    $groupCCreate = "INSERT INTO coursegroups (usrid, category, course, name) VALUES ('" . $usrid . "', '" . $catID . "', '" . $latest . "', 'default');";
+    mysqli_query($mysqli,$groupCCreate);
+    $newPPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $latest . "', '1', 'default page');";
+    mysqli_query($mysqli,$newPPage);
+
+
     header("Refresh:0;");
   }
   // later have these save all inputs and close the page
@@ -370,9 +381,6 @@ function myAutosavedTextbox_onTextChanged()
         <h4 style="float: left !important; text-align: left !important;">
           Sub Category
         </h4>';
-echo 'Category '; echo $defCatID;
-echo '<br /> Userid '; echo $usrid;
-echo '<br /> Course '; echo $latest;
             while($group=$catr->fetch_assoc()){
               $groupName  = $group['name'];
               $groupID = $group['id'];
@@ -380,7 +388,7 @@ echo '<br /> Course '; echo $latest;
               $page=$connection->query($subCat);
               echo '
                 <form method="post">
-                  &nbsp;&nbsp;<input type="text" name="categoryName">
+                  &nbsp;&nbsp;<input type="text" name="categoryName" class="subCat">
                 </form>
                 <br />';
 
@@ -393,7 +401,7 @@ echo '<br /> Course '; echo $latest;
                   $pageID = $pageD['id'];
                   echo '
                     <form method="post">
-                      <input type="text" name="pageName" style="min-width:88%;margin-left: 7%; outline: 0; border-width: 0 0 2px; border-color: blue">&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;<i class="fas fa-cog"></i>
+                      <input type="text" name="pageName" class="subCat pageInput">&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;<i class="fas fa-cog"></i>
                     </form>';
                 }
 
