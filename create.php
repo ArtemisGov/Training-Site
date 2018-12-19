@@ -169,17 +169,14 @@
     $categoryCount = $categoryCount + 1;
     $category = "INSERT INTO category ( course, creator, catnum ) VALUES ('" . $finalID . "', '" . $usrid . "', '" . $categoryCount . "');";
     mysqli_query($mysqli,$category);
-
     $newCat = "SELECT id, name FROM category WHERE creator = '" . $usrid . "' ORDER BY id DESC LIMIT 1;";
     $newCatResponse = @mysqli_query($mysqli,$newCat);
     $newCatRow = @mysqli_fetch_array($newCatResponse);
     $catID = $newCatRow['id'];
     $groupCCreate = "INSERT INTO coursegroups (usrid, category, course, name) VALUES ('" . $usrid . "', '" . $catID . "', '" . $latest . "', 'default');";
     mysqli_query($mysqli,$groupCCreate);
-    $newPPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $latest . "', '1', 'default page');";
+    $newPPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $latest . "', '1', 'Default page name');";
     mysqli_query($mysqli,$newPPage);
-
-
     header("Refresh:0;");
   }
   // later have these save all inputs and close the page
@@ -198,7 +195,26 @@
       mysqli_query($mysqli,$publishedupd);
       header("Refresh:0;");
     }
-
+    if(isset($_POST['subCatName'])) {
+      $leCatID = $_POST['subCatID'];
+      $leCatName = $_POST['categoryName'];
+      $sbn = "UPDATE coursegroups SET name = '" . $leCatName . "' WHERE id = '" . $leCatID . "';";
+      mysqli_query($mysqli,$sbn);
+      header("Refresh:0;");
+    }
+    if(isset($_POST['pageNameSbm'])) {
+      $zeCatID = $_POST['pageID'];
+      $zeCatName = $_POST['pageName'];
+      $pbs = "UPDATE page SET name = '" . $zeCatName . "' WHERE id = '" . $zeCatID . "';";
+      mysqli_query($mysqli,$pbs);
+      $addedPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $latest . "', '1', 'Default page name');";
+      mysqli_query($mysqli,$addedPage);
+      header("Refresh:0;");
+    }
+    if(isset($_POST['nSubCatg'])) {
+      // Add Sub Category
+      
+    }
     /*
       Since this has become so fucking long I gotta translate the variables to remember them.
       CourseID = $_SESSION["course"]; or $latest
@@ -374,12 +390,11 @@ function myAutosavedTextbox_onTextChanged()
               <textarea cols="40" rows="3" class="defaultCatDesc textarea" name="defaultCatDesc" onfocus="this.placeholder = \'\'" onblur="this.placeholder = \'Category Description\'"  placeholder="Category Description">'; if (isset($defCatDesc)) { echo $defCatDesc; } else {  } echo '</textarea>
               <input type="text" class="defaultCatName uneditable-input" name="catDescID" value="' . $defCatID . '" style="position:absolute; left: -9999999px; height: 3px;" readonly>
               <button type="submit" value="defaultCatDesc" name="defaultCatSubmit" class="btn btn-primary button btn-lg extra"><i class="far fa-check-circle checkbox"></i></button>
-          </form>';
-         echo $usrid; echo "|"; echo $latest; echo "|"; echo $courseName; echo "|"; echo $_SESSION["category"]; echo "|"; echo $_SESSION["course"];
-        echo '</p>
+          </form>
+        </p>
         <br />
         <h4 style="float: left !important; text-align: left !important;">
-          Sub Category
+          Sub Category &nbsp;&nbsp;&nbsp; <i class="fas fa-plus-square" type="submit" name="nSubCatg"></i>
         </h4>';
             while($group=$catr->fetch_assoc()){
               $groupName  = $group['name'];
@@ -389,6 +404,8 @@ function myAutosavedTextbox_onTextChanged()
               echo '
                 <form method="post">
                   &nbsp;&nbsp;<input type="text" name="categoryName" class="subCat">
+                  <input type="text" class="defaultCatName uneditable-input" name="subCatID" value="' . $groupID . '" style="position:absolute; left: -9999999px; height: 3px;" readonly>
+                  <button type="submit" value="defaultCatDesc" name="subCatName" class="btn btn-primary button btn-lg extra"  style="position:absolute; left: -9999999px; height: 3px;"></button>
                 </form>
                 <br />';
 
@@ -402,6 +419,8 @@ function myAutosavedTextbox_onTextChanged()
                   echo '
                     <form method="post">
                       <input type="text" name="pageName" class="subCat pageInput">&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;<i class="fas fa-cog"></i>
+                      <input type="text" class="defaultCatName uneditable-input" name="pageID" value="' . $pageID . '" style="position:absolute; left: -9999999px; height: 3px;" readonly>
+                      <button type="submit" value="defaultCatDesc" name="pageNameSbm" class="btn btn-primary button btn-lg extra"  style="position:absolute; left: -9999999px; height: 3px;"></button>
                     </form>';
                 }
 

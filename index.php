@@ -40,6 +40,7 @@ echo '<!DOCTYPE html>
 <head>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<link href="./css/index.css" rel="stylesheet">
 <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -59,88 +60,7 @@ html, body {
     echo 'overflow: hidden; overflow-y: hidden;overflow-x:hidden;';
   }
 echo '}
-#wrapper {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  flex-direction: column;
-  justify-content: center;
-  overflow: auto;
-}
-form {
-  width: 80%;
-}
-h2 {
-  font-family: "Lato", sans-serif;
-}
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: white;
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  width: 100vw;
-}
-li {
-  float: right;
-}
-li.left {
-  float: left !important;
-}
-li a {
-  display: block;
-  color: black;
-  text-align: center;
-  padding: 17px 10px;
-  text-decoration: none;
-  font-size: 19px;
-}
-#Avatarwrapper {
-  height: 30px;
-  width: 30px;
-  border-radius: 50px;
-  display: block;
-  color: black;
-}
-.dropdown-content {
-  transition: visibility .1s ease-in-out .001s;
-  visibility: hidden;
-  width: 200px;
-  position: fixed;
-  background-color: white;
-}
-#menuAvatar {
-  height: 28px;
-  width: 28px;
-}
-#rando {
-  text-align: center;
-  padding: 17px 10px;
-  text-decoration: none;
-  font-size: 19px;
-  border:none;
-  background-color: white;
-}
-#rando:focus + .dropdown-content {
-  visibility: visible;
-  transition: visibility .1s ease-in-out .01s;
-}
-.dropdown-content:focus + .dropdown-content {
-  visibility: visible;
-  transition: visibility .1s ease-in-out .01s;
-}
-#wrapper {
-  position: relative;
-  margin-top: 50px;
-  background-color: #339fff;
-  height: 100vh;
-  width: 100vw;
-  color: white;
-  padding: 10px;
-}
+
 </style>
 <script>
   $(document).ready(function() {

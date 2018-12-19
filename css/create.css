@@ -210,7 +210,7 @@ button {
     resize: none;
   }
   .checkbox {
-    color: #34a844;
+    color: white;
   }
   .button {
     background-color: transparent;
@@ -266,4 +266,7 @@ button {
   }
 .fa-arrow-right {
   color: #60af48;
+}
+.fa-plus-square {
+  color: #428bca;
 }
