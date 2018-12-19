@@ -69,7 +69,7 @@
   if (isset($create) AND $create == "yes") {
     $auth = "INSERT INTO authentication (usrid, type) VALUES ('" . $usrid . "', 'group');";
     mysqli_query($mysqli,$auth);
-    $authCountQuery = "SELECT COUNT(id), MAX(id) FROM authentication WHERE usrid='" . $usrid . "' AND type='group' AND timestamps >= DATE_SUB(NOW(),INTERVAL 1 HOUR);";
+    $authCountQuery = "SELECT COUNT(id), MAX(id) FROM authentication WHERE usrid='" . $usrid . "' AND type='group' AND timestamps >= DATE_SUB(NOW(),INTERVAL 1 MINUTE);";
     $authCountRes = @mysqli_query($mysqli,$authCountQuery);
     $authCountRow = @mysqli_fetch_array($authCountRes);
     $authCount = $authCountRow['COUNT(id)'];
@@ -87,7 +87,13 @@
       mysqli_query($mysqli,$sub);
       $category = "INSERT INTO category ( course, creator, catnum ) VALUES ('" . $tempID . "', '" . $usrid . "', '1');";
       mysqli_query($mysqli,$category);
-      $groupCreate = "INSERT INTO coursegroups (usrid, category, course, name) VALUES ('" . $usrid . "', 1, '" . $tempID . "', 'default');";
+
+      $catrQuery = "SELECT id, name FROM category WHERE creator = '" . $usrid . "' ORDER BY id DESC LIMIT 1;"; // giving 0 not id of shiet
+      $catrResponse = @mysqli_query($mysqli,$catrQuery);
+      $catrRow = @mysqli_fetch_array($catrResponse);
+      $tempCatID = $catrRow['id'];
+
+      $groupCreate = "INSERT INTO coursegroups (usrid, category, course, name) VALUES ('" . $usrid . "', '" . $tempCatID . "', '" . $tempID . "', 'default');";
       mysqli_query($mysqli,$groupCreate);
       $groupCreate = "INSERT INTO page (course, groupID, name) VALUES ('" . $tempID . "', '1', 'default page');";
       mysqli_query($mysqli,$groupCreate);
@@ -364,7 +370,9 @@ function myAutosavedTextbox_onTextChanged()
         <h4 style="float: left !important; text-align: left !important;">
           Sub Category
         </h4>';
-
+echo 'Category '; echo $defCatID;
+echo '<br /> Userid '; echo $usrid;
+echo '<br /> Course '; echo $latest;
             while($group=$catr->fetch_assoc()){
               $groupName  = $group['name'];
               $groupID = $group['id'];
