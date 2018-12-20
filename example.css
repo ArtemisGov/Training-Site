@@ -1,5 +1,5 @@
 .linedwrap {
-	border: 1px solid #c0c0c0;
+	border: 1px solid #282828;
 	padding: 3px;
 }
 
@@ -25,7 +25,7 @@
 	width: 50px;
 	float: left;
 	overflow: hidden;
-	border-right: 1px solid #c0c0c0;
+	border-right: 1px solid #282828;
 	margin-right: 10px;
 }
 
@@ -42,5 +42,18 @@
 }
 
 .linedwrap .codelines .lineselect {
-	color: red;
+	color: #5d605c;
+}
+textarea {
+	width: 100vw;
+	height: 105vh !important;
+	background-color: #5d605c;
+	color: white;
+	margin-top: -2px;
+	border-color: #5d605c;
+}
+body, html {
+	margin: 0;
+	background-color: #282828;
+	overflow-x: hidden;
 }
