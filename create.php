@@ -409,36 +409,50 @@ function myAutosavedTextbox_onTextChanged()
           </form>
         </p>
         <br />
-        <h4 style="float: left !important; text-align: left !important;">
+        <!--<h4 style="float: left !important; text-align: left !important;">
           Sub Category &nbsp;&nbsp;&nbsp; <form method="post"><i class="fas fa-plus-square" type="submit" name="nSubCatg" class="nSubCatg"></i></form>
-        </h4>';
+        </h4>-->
+';
+
             while($group=$catr->fetch_assoc()){
               $groupName  = $group['name'];
               $courseGroupID = $group['id'];
-              $pageQ = "SELECT id, name, type FROM page WHERE course = '" . $latest . "' AND groupID = '" . $courseGroupID . "';";
-              $page=$connection->query($subCat);
-              echo '
+              //echo $courseGroupID;
+
+
+              $RBackQuery = "SELECT groupID FROM page WHERE groupID = '" . $courseGroupID . "';";
+              $RBackResponse = @mysqli_query($mysqli,$RBackQuery);
+              $RBackRow = @mysqli_fetch_array($RBackResponse);
+              $RBack = $RBackRow['groupID'];
+
+
+              echo '        <h4 style="float:right !important;">
+                        Sub Category:
+                      </h4>
                 <form method="post">
-                  &nbsp;&nbsp;<input type="text" name="categoryName" class="subCat">
+                  <b>' . $courseGroupID . '</b>&nbsp;&nbsp;<input type="text" name="categoryName" class="subCat">
                   <input type="text" class="defaultCatName uneditable-input" name="subCatID" value="' . $courseGroupID . '" style="position:absolute; left: -9999999px; height: 3px;" readonly>
                   <button type="submit" value="defaultCatDesc" name="subCatName" class="btn btn-primary button btn-lg extra"  style="position:absolute; left: -9999999px; height: 3px;"></button>
                 </form>
                 <br />';
 
-                echo '
-                <h5 style="float: left !important; text-align: left !important; margin-left: 7%;">
-                  Add a Page
-                </h5>';
+                  $pageQ = "SELECT id, name, type FROM page WHERE course = '" . $latest . "' AND groupID = '" . $courseGroupID . "';";
+                  $page=$connection->query($subCat);
+                  while($pageD=$page->fetch_assoc()){
+                    echo "<br />";
+                    $pageName = $pageD['name'];
+                    $pageID = $pageD['id'];
+                    //echo $pageID;
+                    if ($courseGroupID == $RBack) {
+                    echo '
+                      <form method="post">
+                        <input type="text" name="pageName" class="subCat pageInput">&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;<i class="fas fa-cog"></i>
+                        ' . $pageID . '<input type="text" class="defaultCatName uneditable-input" name="pageID" value="' . $pageID . '" style="position:absolute; left: -9999999px; height: 3px;" readonly>
+                        <button type="submit" value="defaultCatDesc" name="pageNameSbm" class="btn btn-primary button btn-lg extra"  style="position:absolute; left: -9999999px; height: 3px;"></button>
+                      </form>';
+                  }
+              }
 
-                while($pageD=$page->fetch_assoc()){
-                  $pageID = $pageD['id'];
-                  echo '
-                    <form method="post">
-                      <input type="text" name="pageName" class="subCat pageInput">&nbsp;<i class="fas fa-arrow-right"></i>&nbsp;<i class="fas fa-cog"></i>
-                      <input type="text" class="defaultCatName uneditable-input" name="pageID" value="' . $pageID . '" style="position:absolute; left: -9999999px; height: 3px;" readonly>
-                      <button type="submit" value="defaultCatDesc" name="pageNameSbm" class="btn btn-primary button btn-lg extra"  style="position:absolute; left: -9999999px; height: 3px;"></button>
-                    </form>';
-                }
 
             }
         echo '
