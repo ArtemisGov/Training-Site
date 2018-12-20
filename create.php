@@ -88,14 +88,20 @@
       $category = "INSERT INTO category ( course, creator, catnum ) VALUES ('" . $tempID . "', '" . $usrid . "', '1');";
       mysqli_query($mysqli,$category);
 
-      $catrQuery = "SELECT id, name FROM category WHERE creator = '" . $usrid . "' ORDER BY id DESC LIMIT 1;";
+      $catrQuery = "SELECT id FROM category WHERE creator = '" . $usrid . "' ORDER BY id DESC LIMIT 1;";
       $catrResponse = @mysqli_query($mysqli,$catrQuery);
       $catrRow = @mysqli_fetch_array($catrResponse);
       $tempCatID = $catrRow['id'];
 
       $groupCreate = "INSERT INTO coursegroups (usrid, category, course, name) VALUES ('" . $usrid . "', '" . $tempCatID . "', '" . $tempID . "', 'default');";
       mysqli_query($mysqli,$groupCreate);
-      $newPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $tempID . "', '1', 'default page');";
+
+      $cgrpsQuery = "SELECT id FROM coursegroups WHERE usrid = '" . $usrid . "' ORDER BY id DESC LIMIT 1;";
+      $cgrpsResponse = @mysqli_query($mysqli,$cgrpsQuery);
+      $cgrpsRow = @mysqli_fetch_array($cgrpsResponse);
+      $cgrps = $cgrpsRow['id'];
+
+      $newPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $tempID . "', '" . $cgrps . "', 'default page');";
       mysqli_query($mysqli,$newPage);
       $defaultCatQ = "SELECT id FROM category WHERE course = '" . $tempID . "' ORDER BY id DESC LIMIT 1;";
       $defaultCatRes = @mysqli_query($mysqli,$defaultCatQ);
@@ -175,7 +181,11 @@
     $catID = $newCatRow['id'];
     $groupCCreate = "INSERT INTO coursegroups (usrid, category, course, name) VALUES ('" . $usrid . "', '" . $catID . "', '" . $latest . "', 'default');";
     mysqli_query($mysqli,$groupCCreate);
-    $newPPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $latest . "', '1', 'Default page name');";
+    $cgrpsQuery = "SELECT id FROM coursegroups WHERE usrid = '" . $usrid . "' ORDER BY id DESC LIMIT 1;";
+    $cgrpsResponse = @mysqli_query($mysqli,$cgrpsQuery);
+    $cgrpsRow = @mysqli_fetch_array($cgrpsResponse);
+    $cgrps = $cgrpsRow['id'];
+    $newPPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $latest . "', '" . $cgrps . "', 'Default page name');";
     mysqli_query($mysqli,$newPPage);
     header("Refresh:0;");
   }
@@ -207,13 +217,19 @@
       $zeCatName = $_POST['pageName'];
       $pbs = "UPDATE page SET name = '" . $zeCatName . "' WHERE id = '" . $zeCatID . "';";
       mysqli_query($mysqli,$pbs);
-      $addedPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $latest . "', '1', 'Default page name');";
+      $cgrpsQuery = "SELECT id FROM coursegroups WHERE usrid = '" . $usrid . "' ORDER BY id DESC LIMIT 1;";
+      $cgrpsResponse = @mysqli_query($mysqli,$cgrpsQuery);
+      $cgrpsRow = @mysqli_fetch_array($cgrpsResponse);
+      $cgrps = $cgrpsRow['id'];
+      $addedPage = "INSERT INTO page (course, groupID, name) VALUES ('" . $latest . "', '" . $cgrps . "', 'Default page name');";
       mysqli_query($mysqli,$addedPage);
       header("Refresh:0;");
     }
     if(isset($_POST['nSubCatg'])) {
       // Add Sub Category
-      
+      $nscg = "INSERT INTO coursegroups (usrid, category, course, name) VALUES ('" . $usrid . "', '" . $catID . "', '" . $latest . "', 'default');";
+      mysqli_query($mysqli,$nscg);
+      header("Refresh:0;");
     }
     /*
       Since this has become so fucking long I gotta translate the variables to remember them.
@@ -394,17 +410,17 @@ function myAutosavedTextbox_onTextChanged()
         </p>
         <br />
         <h4 style="float: left !important; text-align: left !important;">
-          Sub Category &nbsp;&nbsp;&nbsp; <i class="fas fa-plus-square" type="submit" name="nSubCatg"></i>
+          Sub Category &nbsp;&nbsp;&nbsp; <form method="post"><i class="fas fa-plus-square" type="submit" name="nSubCatg" class="nSubCatg"></i></form>
         </h4>';
             while($group=$catr->fetch_assoc()){
               $groupName  = $group['name'];
-              $groupID = $group['id'];
-              $pageQ = "SELECT id, name, type FROM page WHERE category='" . $latest . "' AND usrid='" . $usrid . "';";
+              $courseGroupID = $group['id'];
+              $pageQ = "SELECT id, name, type FROM page WHERE course = '" . $latest . "' AND groupID = '" . $courseGroupID . "';";
               $page=$connection->query($subCat);
               echo '
                 <form method="post">
                   &nbsp;&nbsp;<input type="text" name="categoryName" class="subCat">
-                  <input type="text" class="defaultCatName uneditable-input" name="subCatID" value="' . $groupID . '" style="position:absolute; left: -9999999px; height: 3px;" readonly>
+                  <input type="text" class="defaultCatName uneditable-input" name="subCatID" value="' . $courseGroupID . '" style="position:absolute; left: -9999999px; height: 3px;" readonly>
                   <button type="submit" value="defaultCatDesc" name="subCatName" class="btn btn-primary button btn-lg extra"  style="position:absolute; left: -9999999px; height: 3px;"></button>
                 </form>
                 <br />';
